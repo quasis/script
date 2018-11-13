@@ -17,9 +17,9 @@ The script can be executed with one of the following command line options:
 - `enhance policies` - defines a set of group policies to prevent security and privacy breaches
 - `enhance settings` - defines a set of user settings for better usability and privacy protection
 - `enhance services` - disables telemetry and bloatware services
-- `enhance features` - disables useless and obsolete Windows features 
+- `enhance features` - disables useless and obsolete Windows features
 - `enhance programs` - disables or removes preinstalled bloatware applications
-- `enhance schedule` - disables scheduled tasks that collect statistical and telemetry data 
+- `enhance schedule` - disables scheduled tasks that collect statistical and telemetry data
 - `enhance firewall` - cuts off excessive and insecure network communications
 - `enhance all` - executes all the options above one after another
 
@@ -38,7 +38,7 @@ The script cleans the Windows registry and the hard disk from temporary files, c
 
 The script can be executed with one of the following command line options:
 
-- `cleanup harddisk` - cleans the disk from caches, browsing history, temporary, log and trash files 
+- `cleanup harddisk` - cleans the disk from caches, browsing history, temporary, log and trash files
 - `cleanup registry` - TBD
 - `cleanup all` - executes all the options above one after another
 

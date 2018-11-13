@@ -96,13 +96,13 @@ net session > nul 2>&1 & if not errorlevel 0 (
             "%%u\.*",^
             "%%u\AppData\Local\Microsoft\Feeds Cache",^
             "%%u\AppData\Local\Microsoft\Internet Explorer\Recovery\*",^
+            "%%u\AppData\Local\Microsoft\Terminal Server Client\Cache",^
             "%%u\AppData\Local\Microsoft\Windows\AppCache",^
             "%%u\AppData\Local\Microsoft\Windows\Explorer",^
             "%%u\AppData\Local\Microsoft\Windows\History",^
             "%%u\AppData\Local\Microsoft\Windows\INetCache",^
             "%%u\AppData\Local\Microsoft\Windows\INetCookies",^
             "%%u\AppData\Local\Microsoft\Windows\Temporary Internet Files",^
-            "%%u\AppData\Roaming\Downloaded Installations",^
             "%%u\AppData\Local\Microsoft\Windows\WebCache",^
             "%%u\AppData\Local\Microsoft\WLSetup\Logs",^
             "%%u\AppData\Local\Temp",^
@@ -111,6 +111,7 @@ net session > nul 2>&1 & if not errorlevel 0 (
             "%%u\AppData\LocalLow\Microsoft\CryptnetUrlCache\MetaData",^
             "%%u\AppData\LocalLow\Microsoft\Internet Explorer\DOMStore",^
             "%%u\AppData\LocalLow\Microsoft\Windows\AppCache",^
+            "%%u\AppData\Roaming\Downloaded Installations",^
             "%%u\AppData\Roaming\Microsoft Visual Studio\logs",^
             "%%u\AppData\Roaming\Microsoft\Office\Recent",^
             "%%u\AppData\Roaming\Microsoft\Windows\Cookies",^
