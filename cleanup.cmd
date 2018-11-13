@@ -94,6 +94,8 @@ net session > nul 2>&1 & if not errorlevel 0 (
         for /d %%f in (^
 
             "%%u\.*",^
+            "%%u\AppData\Local\Microsoft\CLR_v4.0\UsageLogs",^
+            "%%u\AppData\Local\Microsoft\CLR_v4.0_32\UsageLogs",^
             "%%u\AppData\Local\Microsoft\Feeds Cache",^
             "%%u\AppData\Local\Microsoft\Internet Explorer\Recovery\*",^
             "%%u\AppData\Local\Microsoft\Terminal Server Client\Cache",^
