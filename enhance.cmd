@@ -125,6 +125,29 @@ net session > nul 2>&1 & if not errorlevel 0 (
     if errorlevel 0 (echo ok) else (echo error)
 
 
+    :: Policies\Microsoft\FVE
+
+    echo | set /p="Setting Policies\Microsoft\FVE\EncryptionMethod=2... "
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\FVE" /v EncryptionMethod /t REG_DWORD /d 2 /f > nul
+    if errorlevel 0 (echo ok) else (echo error)
+
+    echo | set /p="Setting Policies\Microsoft\FVE\EncryptionMethodNoDiffuser=4... "
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\FVE" /v EncryptionMethodNoDiffuser /t REG_DWORD /d 4 /f > nul
+    if errorlevel 0 (echo ok) else (echo error)
+
+    echo | set /p="Setting Policies\Microsoft\FVE\EncryptionMethodWithXtsOs=7... "
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\FVE" /v EncryptionMethodWithXtsOs /t REG_DWORD /d 7 /f > nul
+    if errorlevel 0 (echo ok) else (echo error)
+
+    echo | set /p="Setting Policies\Microsoft\FVE\EncryptionMethodWithXtsFdv=7... "
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\FVE" /v EncryptionMethodWithXtsFdv /t REG_DWORD /d 7 /f > nul
+    if errorlevel 0 (echo ok) else (echo error)
+
+    echo | set /p="Setting Policies\Microsoft\FVE\EncryptionMethodWithXtsRdv=7... "
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\FVE" /v EncryptionMethodWithXtsRdv /t REG_DWORD /d 7 /f > nul
+    if errorlevel 0 (echo ok) else (echo error)
+
+
     :: Policies\Microsoft\MRT
 
     echo | set /p="Setting Policies\Microsoft\MRT\DontOfferThroughWUAU=1... "
