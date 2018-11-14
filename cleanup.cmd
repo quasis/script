@@ -201,6 +201,25 @@ net session > nul 2>&1 & if not errorlevel 0 (
 :registry
 
 
+    for %%i in (^
+
+        "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU",^
+        "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags",^
+        "HKCU\SOFTWARE\Classes\Wow6432Node\Local Settings\Software\Microsoft\Windows\Shell\BagMRU",^
+        "HKCU\SOFTWARE\Classes\Wow6432Node\Local Settings\Software\Microsoft\Windows\Shell\Bags",^
+        "HKCU\SOFTWARE\Microsoft\Windows\Shell\BagMRU",^
+        "HKCU\SOFTWARE\Microsoft\Windows\Shell\Bags",^
+        "HKCU\SOFTWARE\Microsoft\Windows\ShellNoRoam\BagMRU",^
+        "HKCU\SOFTWARE\Microsoft\Windows\ShellNoRoam\Bags",^
+
+    ) do reg query "%%~i" > nul 2>&1 && if errorlevel 0 (
+
+        echo | set /p="Cleaning %%~i... "
+        reg delete "%%~i" /f > nul & reg add "%%~i" > nul
+        if errorlevel 0 (echo ok) else (echo error)
+    )
+
+
     goto :eof
 
 

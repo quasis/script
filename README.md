@@ -39,7 +39,7 @@ The script cleans the Windows registry and the hard disk from temporary files, c
 The script can be executed with one of the following command line options:
 
 - `cleanup harddisk` - cleans the disk from caches, browsing history, temporary, log and trash files
-- `cleanup registry` - TBD
+- `cleanup registry` - cleans the explorer folder view settings
 - `cleanup all` - executes all the options above one after another
 
 
