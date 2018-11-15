@@ -5,7 +5,7 @@
 ::
 :: SYNOPSIS
 ::
-::     cleanup harddisk|registry|all
+::     cleanup [harddisk|registry|all]
 ::
 :: DESCRIPTION
 ::
@@ -21,10 +21,10 @@
 ::         Cleans cache, browsing history, log files, temporary files and trash.
 ::
 ::     registry
-::         TBD
+::         Cleans the Windows registry from recent files & folder view settings.
 ::
 ::     all
-::         Executes the script with all the options listed above.
+::         Executes the script with all the options listed above (the default).
 ::
 :: LICENSE
 ::
@@ -37,7 +37,7 @@
 net session > nul 2>&1 & if not errorlevel 0 (
     echo Please run the script as Administrator.
 ) else (
-    call :%1
+    if "%1" == "" (call :all) else (call :%1)
 )
 
 @goto :eof
@@ -214,7 +214,7 @@ net session > nul 2>&1 & if not errorlevel 0 (
 
     ) do reg query "%%~i" > nul 2>&1 && if errorlevel 0 (
 
-        echo | set /p="Cleaning %%~i... "
+        echo | set /p="Deleting %%~i\*.*... "
         reg delete "%%~i" /f > nul & reg add "%%~i" > nul
         if errorlevel 0 (echo ok) else (echo error)
     )

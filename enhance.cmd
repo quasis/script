@@ -5,7 +5,7 @@
 ::
 :: SYNOPSIS
 ::
-::     enhance policies|settings|services|features|programs|schedule|firewall|all
+::     enhance [policies|settings|services|features|programs|schedule|firewall|all]
 ::
 :: DESCRIPTION
 ::
@@ -39,7 +39,7 @@
 ::         Defines Firewall rules that cut off insecure network communication.
 ::
 ::     all
-::         Executes the script with all the options listed above.
+::         Executes the script with all the options listed above (the default).
 ::
 :: ENVIRONMENT
 ::
@@ -76,7 +76,7 @@
 net session > nul 2>&1 & if not errorlevel 0 (
     echo Please run the script as Administrator.
 ) else (
-    call :%1
+    if "%1" == "" (call :all) else (call :%1)
 )
 
 @goto :eof

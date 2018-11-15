@@ -21,7 +21,7 @@ The script can be executed with one of the following command line options:
 - `enhance programs` - disables or removes preinstalled bloatware applications
 - `enhance schedule` - disables scheduled tasks that collect statistical and telemetry data
 - `enhance firewall` - cuts off excessive and insecure network communications
-- `enhance all` - executes all the options above one after another
+- `enhance all` - executes all the options above one after another (the default)
 
 Note, that `enhance firewall` will block most of the inbound and outbound traffic, including the web browser. You can either create a firewall rule for the web browser manually after execution of the script, or define a subset of the following environment variables prior to execution of the script:
 
@@ -40,7 +40,7 @@ The script can be executed with one of the following command line options:
 
 - `cleanup harddisk` - cleans the disk from caches, browsing history, temporary, log and trash files
 - `cleanup registry` - cleans the explorer folder view settings
-- `cleanup all` - executes all the options above one after another
+- `cleanup all` - executes all the options above one after another (the default)
 
 
 ### compress.cmd
