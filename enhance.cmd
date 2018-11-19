@@ -166,6 +166,14 @@ net session > nul 2>&1 & if not errorlevel 0 (
     if errorlevel 0 (echo ok) else (echo error)
 
 
+    :: Policies\Microsoft\VSCommon
+
+    echo | set /p="Setting Microsoft\VSCommon\15.0\SQM\OptIn=0... "
+    reg add "HKLM\SOFTWARE\Microsoft\VSCommon\15.0\SQM" /v "OptIn" /t REG_DWORD /d 0 /f > nul
+    reg add "HKLM\SOFTWARE\Wow6432Node\Microsoft\VSCommon\15.0\SQM" /v "OptIn" /t REG_DWORD /d 0 /f > nul
+    if errorlevel 0 (echo ok) else (echo error)
+
+
     :: Policies\Microsoft\Windows Defender
 
     echo | set /p="Setting Policies\Microsoft\Windows Defender\Real-Time Protection\DisableBehaviorMonitoring=1... "
