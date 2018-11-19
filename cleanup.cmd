@@ -75,6 +75,7 @@ net session > nul 2>&1 & if not errorlevel 0 (
     for /d %%f in (^
 
         "%AllUsersProfile%\Dell\UpdatePackage\Log",^
+        "%AllUsersProfile%\Microsoft\VisualStudio\Packages",^
         "%AllUsersProfile%\Microsoft\Windows Defender\Scans\History\Results\*",^
         "%AllUsersProfile%\Microsoft\WLSetup\Logs",^
         "%AllUsersProfile%\Package Cache",^
