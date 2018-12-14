@@ -700,12 +700,16 @@ net session > nul 2>&1 & if not errorlevel 0 (
     for %%i in (^
         CDPSvc,^
         CDPUserSvc,^
+        cphs,^
+        cplspcon,^
         DcpSvc,^
         diagnosticshub.standardcollector.service,^
         DiagTrack,^
         dmwappushservice,^
         dmwappushsvc,^
         DoSvc,^
+        esifsvc,^
+        igfxCUIService2.0.0.0,^
         lfsvc,^
         LicenseManager,^
         MapsBroker,^
