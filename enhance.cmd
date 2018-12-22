@@ -518,6 +518,13 @@ net session > nul 2>&1 & if not errorlevel 0 (
     if errorlevel 0 (echo ok) else (echo error)
 
 
+    :: Policies\Microsoft\Windows\Software Protection Platform
+
+    echo | set /p="Setting Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform\NoGenTicket=1... "
+    reg add "HKLM\Software\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform" /v NoGenTicket /t REG_DWORD /d 1 /f > nul
+    if errorlevel 0 (echo ok) else (echo error)
+
+
     :: Policies\Microsoft\Windows\System
 
     echo | set /p="Setting Policies\Microsoft\Windows\System\EnableSmartScreen=0... "
