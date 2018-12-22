@@ -720,6 +720,7 @@ net session > nul 2>&1 & if not errorlevel 0 (
         lfsvc,^
         LicenseManager,^
         MapsBroker,^
+        MessagingService,^
         NcbService,^
         OneSyncSvc,^
         PcaSvc,^
@@ -730,12 +731,15 @@ net session > nul 2>&1 & if not errorlevel 0 (
         SensorDataService,^
         SensorService,^
         SensrSvc,^
+        shpamsvc,^
         TrkWks,^
         UnistoreSvc,^
         UserDataSvc,^
         WalletService,^
         WbioSrvc,^
+        wercplsupport,^
         WerSvc,^
+        wisvc,^
         wlidsvc,^
         WMPNetworkSvc,^
         WSearch,^
