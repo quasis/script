@@ -120,7 +120,6 @@ net session > nul 2>&1 & if not errorlevel 0 (
             "%%u\AppData\Roaming\Microsoft\Office\Recent",^
             "%%u\AppData\Roaming\Microsoft\Windows\Cookies",^
             "%%u\AppData\Roaming\Microsoft\Windows\Recent",^
-            "%%u\AppData\Roaming\Visual Studio Setup",^
 
         ) do if exist "%%~f" (
 
