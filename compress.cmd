@@ -46,13 +46,14 @@ if not exist "%TARGET%" mkdir "%TARGET%"
 
 for %%f in (%SOURCE%) do if exist "%%f" (
 
-    if "%%~xf" == ".png" (call :png "%%f" "%TARGET%\%%~nf")
-    if "%%~xf" == ".jpg" (call :jpg "%%f" "%TARGET%\%%~nf")
-    if "%%~xf" == ".mp3" (call :mp3 "%%f" "%TARGET%\%%~nf")
-    if "%%~xf" == ".mp4" (call :mp4 "%%f" "%TARGET%\%%~nf")
-    if "%%~xf" == ".mpg" (call :mpg "%%f" "%TARGET%\%%~nf")
-    if "%%~xf" == ".avi" (call :avi "%%f" "%TARGET%\%%~nf")
-    if "%%~xf" == ".3gp" (call :3gp "%%f" "%TARGET%\%%~nf")
+    if "%%~xf" == ".png"  (call :png "%%f" "%TARGET%\%%~nf")
+    if "%%~xf" == ".jpg"  (call :jpg "%%f" "%TARGET%\%%~nf")
+    if "%%~xf" == ".webp" (call :jpg "%%f" "%TARGET%\%%~nf")
+    if "%%~xf" == ".mp3"  (call :mp3 "%%f" "%TARGET%\%%~nf")
+    if "%%~xf" == ".mp4"  (call :mp4 "%%f" "%TARGET%\%%~nf")
+    if "%%~xf" == ".mpg"  (call :mpg "%%f" "%TARGET%\%%~nf")
+    if "%%~xf" == ".avi"  (call :avi "%%f" "%TARGET%\%%~nf")
+    if "%%~xf" == ".3gp"  (call :3gp "%%f" "%TARGET%\%%~nf")
 )
 
 @goto :eof
@@ -66,6 +67,13 @@ for %%f in (%SOURCE%) do if exist "%%f" (
     goto :eof
 
 :jpg
+
+    echo | set /p="Compressing %~1 -> %~2.jpg... "
+    %MAGICK_HOME%\convert.exe "%~1" -strip -auto-level -resize "2048>x2048>" -sampling-factor 4:2:0 -quality 85 -interlace Plane -colorspace RGB -define jpeg:dct-method=float "%~2.jpg" > nul
+    if errorlevel 0 (echo ok) else (echo error)
+    goto :eof
+
+:webp
 
     echo | set /p="Compressing %~1 -> %~2.jpg... "
     %MAGICK_HOME%\convert.exe "%~1" -strip -auto-level -resize "2048>x2048>" -sampling-factor 4:2:0 -quality 85 -interlace Plane -colorspace RGB -define jpeg:dct-method=float "%~2.jpg" > nul
