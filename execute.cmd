@@ -10,7 +10,7 @@
 :: DESCRIPTION
 ::
 ::     This script chooses the proper toolchain to (optionally) compile and then
-::     execute a C/C++, JavaScript and Python source code.
+::     execute a C/C++, JavaScript, TypeScript and Python source code.
 ::
 :: OPTIONS
 ::
@@ -46,6 +46,7 @@ for %%f in (%SOURCE%) do if exist "%%f" (
     if "%%~xf" == ".cpp"  (call :cc "%%f" "%TEMP%\%%~nf.exe")
     if "%%~xf" == ".cxx"  (call :cc "%%f" "%TEMP%\%%~nf.exe")
     if "%%~xf" == ".js"   (call :js "%%f")
+    if "%%~xf" == ".ts"   (call :ts "%%f")
     if "%%~xf" == ".py"   (call :py "%%f")
 )
 
@@ -63,6 +64,14 @@ for %%f in (%SOURCE%) do if exist "%%f" (
     goto :eof
 
 :js
+
+    if exist "%DENO_HOME%" (
+        "%DENO_HOME%\deno.exe" run --allow-all "%~1"
+    )
+
+    goto :eof
+
+:ts
 
     if exist "%DENO_HOME%" (
         "%DENO_HOME%\deno.exe" run --allow-all "%~1"
