@@ -5,7 +5,7 @@ Repository of batch scripts for optimization of Microsoft Windows 7/8/10 and com
 
 ## Scripts
 
-The repository contains three scripts: enhance, cleanup and compress.
+The repository contains four scripts: enhance, cleanup, compress and execute.
 
 
 ### enhance.cmd
@@ -53,6 +53,19 @@ The following environment variables have to be set prior to execution of the scr
 
 - `MAGICK_HOME` - should hold the path to the bin directory of [ImageMagick](https://imagemagick.org/script/download.php)
 - `FFMPEG_HOME` - should hold the path to the bin directory of [FFmpeg](https://ffmpeg.zeranoe.com/builds/)
+
+
+### execute.cmd
+
+The script chooses the proper toolchain to (optionally) compile and then execute a C/C++, JavaScript and Python source code.
+
+Use `execute [source]` to execute the desired source files, where `source` is the wild card mask of the desired files (defaults to `*.*`).
+
+The following environment variables have to be set prior to execution of the script:
+
+- `LLVM_HOME` - should hold the path to the bin directory of [LLVM](https://releases.llvm.org/download.html)
+- `DENO_HOME` - should hold the path to the directory of [Deno](https://github.com/denoland/deno/releases) executable
+- `PYTHON_HOME` - should hold the path to the directory of [Python](https://www.python.org/downloads/windows) executable
 
 
 ## Contributing
