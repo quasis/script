@@ -95,6 +95,7 @@ net session > nul 2>&1 & if not errorlevel 0 (
 
             "%%u\.*",^
             "%%u\AppData\Local\CrashDumps",^
+            "%%u\AppData\Local\deno",^
             "%%u\AppData\Local\Microsoft\CLR_v4.0\UsageLogs",^
             "%%u\AppData\Local\Microsoft\CLR_v4.0_32\UsageLogs",^
             "%%u\AppData\Local\Microsoft\Feeds Cache",^
