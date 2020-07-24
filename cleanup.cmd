@@ -108,6 +108,7 @@ net session > nul 2>&1 & if not errorlevel 0 (
             "%%u\AppData\Local\Microsoft\Windows\Temporary Internet Files",^
             "%%u\AppData\Local\Microsoft\Windows\WebCache",^
             "%%u\AppData\Local\Microsoft\WLSetup\Logs",^
+            "%%u\AppData\Local\pip",^
             "%%u\AppData\Local\Temp",^
             "%%u\AppData\Local\TortoiseGit",^
             "%%u\AppData\LocalLow\Microsoft\CryptnetUrlCache\Content",^
