@@ -30,6 +30,9 @@
 ::     PYTHON_HOME
 ::         Variable that defines the path to the directory of Python executable.
 ::
+::     PYTHON_PATH
+::         Variable that defines additional directories for the packages search.
+::
 :: LICENSE
 ::
 ::     Copyright 2018 Quasis (info@quasis.io) - The MIT Licence
@@ -82,6 +85,11 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 :py
 
     if exist "%PYTHON_HOME%" (
+
+        if "%PYTHON_PATH%" neq "" (
+            set PYTHONPATH=%PYTHONPATH%;%PYTHON_PATH%
+        )
+
         "%PYTHON_HOME%\python.exe" -B "%~1"
     )
 
