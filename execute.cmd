@@ -59,7 +59,11 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 
     if exist "%~2" del "%~2"
 
-    if exist "%LLVM_HOME%" (
+    if not exist "%LLVM_HOME%" (
+        set LLVM_HOME="%ProgramFiles%\LLVM\bin"
+    )
+
+    if exist "%LLVM_HOME%\clang++.exe" (
         "%LLVM_HOME%\clang++.exe" -O3 -std=c++2a -m64 -static -Wall -Wextra -Wpedantic --target=x86_64-pc-windows-msvc "%~1" -o "%~2"
     )
 
@@ -68,7 +72,11 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 
 :js
 
-    if exist "%DENO_HOME%" (
+    if not exist "%DENO_HOME%" (
+        set DENO_HOME="%ProgramFiles%\Deno"
+    )
+
+    if exist "%DENO_HOME%\deno.exe" (
         "%DENO_HOME%\deno.exe" run --allow-all "%~1"
     )
 
@@ -76,7 +84,11 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 
 :ts
 
-    if exist "%DENO_HOME%" (
+    if not exist "%DENO_HOME%" (
+        set DENO_HOME="%ProgramFiles%\Deno"
+    )
+
+    if exist "%DENO_HOME%\deno.exe" (
         "%DENO_HOME%\deno.exe" run --allow-all "%~1"
     )
 
@@ -84,7 +96,11 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 
 :py
 
-    if exist "%PYTHON_HOME%" (
+    if not exist "%PYTHON_HOME%" (
+        set PYTHON_HOME="%ProgramFiles%\Python"
+    )
+
+    if exist "%PYTHON_HOME%\python.exe" (
 
         if "%PYTHON_PATH%" neq "" (
             set PYTHONPATH=%PYTHONPATH%;%PYTHON_PATH%
