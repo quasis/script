@@ -1,7 +1,7 @@
 ::
 :: NAME
 ::
-::     compress - image, audio & video compression script for Microsoft Windows
+::     compress - media compression script for Microsoft Windows
 ::
 :: SYNOPSIS
 ::
@@ -13,6 +13,9 @@
 ::     video files.   The compression is achieved by proper configuration of the
 ::     encoding algorithms (up to x10) for images,  and by choice of codecs with
 ::     better compression ratio (up to x3) for audio and video files.
+::
+::     Virtual Hard Disks (VHD / VHDX) are compressed using the builtin diskpart
+::     utility.
 ::
 :: OPTIONS
 ::
@@ -54,6 +57,8 @@ for %%f in (%SOURCE%) do if exist "%%f" (
     if "%%~xf" == ".mpg"  (call :mpg "%%f" "%TARGET%\%%~nf")
     if "%%~xf" == ".avi"  (call :avi "%%f" "%TARGET%\%%~nf")
     if "%%~xf" == ".3gp"  (call :3gp "%%f" "%TARGET%\%%~nf")
+    if "%%~xf" == ".vhd"  (call :vhd "%%f")
+    if "%%~xf" == ".vhdx" (call :vhd "%%f")
 )
 
 @goto :eof
@@ -112,6 +117,20 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 
     echo | set /p="Compressing %~1 -> %~2.mp4... "
     %FFMPEG_HOME%\ffmpeg.exe -i "%~1" -acodec mp3 -vcodec h264 -y "%~2.mp4" > nul 2>&1
+    if errorlevel 0 (echo ok) else (echo error)
+    goto :eof
+
+:vhd
+
+    echo | set /p="Compressing %~1... "
+
+   (echo select vdisk file="%~1"
+    echo attach vdisk readonly
+    echo compact vdisk
+    echo detach vdisk
+    echo exit
+    ) | diskpart > nul 2>&1
+
     if errorlevel 0 (echo ok) else (echo error)
     goto :eof
 
