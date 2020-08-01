@@ -60,7 +60,7 @@ for %%f in (%SOURCE%) do if exist "%%f" (
     if exist "%~2" del "%~2"
 
     if not exist "%LLVM_HOME%" (
-        set LLVM_HOME="%ProgramFiles%\LLVM\bin"
+        set LLVM_HOME=%ProgramFiles%\LLVM\bin
     )
 
     if exist "%LLVM_HOME%\clang++.exe" (
@@ -73,7 +73,7 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 :js
 
     if not exist "%DENO_HOME%" (
-        set DENO_HOME="%ProgramFiles%\Deno"
+        set DENO_HOME=%ProgramFiles%\Deno
     )
 
     if exist "%DENO_HOME%\deno.exe" (
@@ -85,7 +85,7 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 :ts
 
     if not exist "%DENO_HOME%" (
-        set DENO_HOME="%ProgramFiles%\Deno"
+        set DENO_HOME=%ProgramFiles%\Deno
     )
 
     if exist "%DENO_HOME%\deno.exe" (
@@ -97,7 +97,7 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 :py
 
     if not exist "%PYTHON_HOME%" (
-        set PYTHON_HOME="%ProgramFiles%\Python"
+        set PYTHON_HOME=%ProgramFiles%\Python
     )
 
     if exist "%PYTHON_HOME%\python.exe" (
