@@ -30,10 +30,7 @@
 ::     The script will function if the following environment variables are set:
 ::
 ::     MAGICK_HOME
-::         Variable that defines the path to the bin directory of ImageMagick.
-::
-::     FFMPEG_HOME
-::         Variable that defines the path to the bin directory of FFmpeg.
+::         Variable holding the path to the installation folder of ImageMagick.
 ::
 :: LICENSE
 ::
@@ -42,6 +39,24 @@
 
 @echo off
 @setLocal EnableDelayedExpansion
+
+if not exist "%MAGICK_HOME%" (
+
+    for /d %%f in (^
+
+        "%ProgramFiles%\ImageMagick",^
+        "%ProgramFiles(x86)%\ImageMagick",^
+
+        ) do if exist "%%~f" (
+            set MAGICK_HOME=%%~f
+        )
+    )
+
+    if not exist "%MAGICK_HOME%" (
+        echo Failed to locate ImageMagick directory.
+        goto :eof
+    )
+)
 
 if "%1" neq "" (set SOURCE=%1) else (set SOURCE=%CD%\*.*)
 if "%2" neq "" (set TARGET=%2) else (set TARGET=%TEMP%)
@@ -67,56 +82,56 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 :png
 
     echo | set /p="Compressing %~1 -> %~2.png... "
-    %MAGICK_HOME%\convert.exe "%~1" -strip -auto-level -resize "2048>x2048>" -type palette -interlace none -define png:exclude-chunk=all -define png:compression-filter=5 -define png:compression-strategy=0 -define png:compression-level=9 "%~2.png" > nul
+    "%MAGICK_HOME%\convert.exe" "%~1" -strip -auto-level -resize "2048>x2048>" -type palette -interlace none -define png:exclude-chunk=all -define png:compression-filter=5 -define png:compression-strategy=0 -define png:compression-level=9 "%~2.png" > nul
     if errorlevel 0 (echo ok) else (echo error)
     goto :eof
 
 :jpg
 
     echo | set /p="Compressing %~1 -> %~2.jpg... "
-    %MAGICK_HOME%\convert.exe "%~1" -strip -auto-level -resize "2048>x2048>" -sampling-factor 4:2:0 -quality 85 -interlace Plane -colorspace RGB -define jpeg:dct-method=float "%~2.jpg" > nul
+    "%MAGICK_HOME%\convert.exe" "%~1" -strip -auto-level -resize "2048>x2048>" -sampling-factor 4:2:0 -quality 85 -interlace Plane -colorspace RGB -define jpeg:dct-method=float "%~2.jpg" > nul
     if errorlevel 0 (echo ok) else (echo error)
     goto :eof
 
 :webp
 
     echo | set /p="Compressing %~1 -> %~2.jpg... "
-    %MAGICK_HOME%\convert.exe "%~1" -strip -auto-level -resize "2048>x2048>" -sampling-factor 4:2:0 -quality 85 -interlace Plane -colorspace RGB -define jpeg:dct-method=float "%~2.jpg" > nul
+    "%MAGICK_HOME%\convert.exe" "%~1" -strip -auto-level -resize "2048>x2048>" -sampling-factor 4:2:0 -quality 85 -interlace Plane -colorspace RGB -define jpeg:dct-method=float "%~2.jpg" > nul
     if errorlevel 0 (echo ok) else (echo error)
     goto :eof
 
 :mp3
 
     echo | set /p="Compressing %~1 -> %~2.mp3... "
-    %FFMPEG_HOME%\ffmpeg.exe -i "%~1" -acodec mp3 -y "%~2.mp3" > nul 2>&1
+    "%MAGICK_HOME%\ffmpeg.exe" -i "%~1" -acodec mp3 -y "%~2.mp3" > nul 2>&1
     if errorlevel 0 (echo ok) else (echo error)
     goto :eof
 
 :mp4
 
     echo | set /p="Compressing %~1 -> %~2.mp4... "
-    %FFMPEG_HOME%\ffmpeg.exe -i "%~1" -acodec mp3 -vcodec h264 -y "%~2.mp4" > nul 2>&1
+    "%MAGICK_HOME%\ffmpeg.exe" -i "%~1" -acodec mp3 -vcodec h264 -y "%~2.mp4" > nul 2>&1
     if errorlevel 0 (echo ok) else (echo error)
     goto :eof
 
 :mpg
 
     echo | set /p="Compressing %~1 -> %~2.mp4... "
-    %FFMPEG_HOME%\ffmpeg.exe -i "%~1" -acodec mp3 -vcodec h264 -y "%~2.mp4" > nul 2>&1
+    "%MAGICK_HOME%\ffmpeg.exe" -i "%~1" -acodec mp3 -vcodec h264 -y "%~2.mp4" > nul 2>&1
     if errorlevel 0 (echo ok) else (echo error)
     goto :eof
 
 :avi
 
     echo | set /p="Compressing %~1 -> %~2.mp4... "
-    %FFMPEG_HOME%\ffmpeg.exe -i "%~1" -acodec mp3 -vcodec h264 -y "%~2.mp4" > nul 2>&1
+    "%MAGICK_HOME%\ffmpeg.exe" -i "%~1" -acodec mp3 -vcodec h264 -y "%~2.mp4" > nul 2>&1
     if errorlevel 0 (echo ok) else (echo error)
     goto :eof
 
 :3gp
 
     echo | set /p="Compressing %~1 -> %~2.mp4... "
-    %FFMPEG_HOME%\ffmpeg.exe -i "%~1" -acodec mp3 -vcodec h264 -y "%~2.mp4" > nul 2>&1
+    "%MAGICK_HOME%\ffmpeg.exe" -i "%~1" -acodec mp3 -vcodec h264 -y "%~2.mp4" > nul 2>&1
     if errorlevel 0 (echo ok) else (echo error)
     goto :eof
 
