@@ -998,39 +998,78 @@ net session > nul 2>&1 & if not errorlevel 0 (
     netsh advfirewall firewall add rule name="Custom Rules - Remote Desktop" dir=Out protocol=tcp program="%SystemRoot%\system32\mstsc.exe" remoteip=Any localport=Any remoteport=Any action=allow > nul
     if errorlevel 0 (echo ok) else (echo error)
 
-    if exist "%CLIENT_HTTP%" (
+    for /d %%f in (^
 
-        echo | set /p="Allowing Firewall\Custom Rules - HTTP Client... "
-        netsh advfirewall firewall add rule name="Custom Rules - HTTP Client" dir=Out protocol=tcp program="%CLIENT_HTTP%" remoteip=Any localport=Any remoteport=80,443 action=allow > nul
-        if errorlevel 0 (echo ok) else (echo error)
+        "%CLIENT_HTTP%",^
+        "%ProgramFiles%\Opera\launcher.exe",^
+
+        ) do if exist "%%~f" (
+
+            if "%%~dpf" == "%ProgramFiles%\Opera\" (
+                for /R "%ProgramFiles%\Opera" %%v in (*opera.exe) do (set CLIENT=%%v)
+            ) else (
+                set CLIENT=%%~f
+            )
+
+            echo | set /p="Allowing Firewall\Custom Rules - HTTP Client... "
+            netsh advfirewall firewall add rule name="Custom Rules - HTTP Client" dir=Out protocol=tcp program="!CLIENT!" remoteip=Any localport=Any remoteport=Any action=allow > nul
+            if errorlevel 0 (echo ok) else (echo error)
+        )
     )
 
-    if exist "%CLIENT_MAIL%" (
+    for /d %%f in (^
 
-        echo | set /p="Allowing Firewall\Custom Rules - Mail Client... "
-        netsh advfirewall firewall add rule name="Custom Rules - Mail Client" dir=Out protocol=tcp program="%CLIENT_MAIL%" remoteip=Any localport=Any remoteport=Any action=allow > nul
-        if errorlevel 0 (echo ok) else (echo error)
+        "%CLIENT_MAIL%",^
+        "%ProgramFiles(x86)%\Microsoft Office\Office12\OUTLOOK.EXE",^
+
+        ) do if exist "%%~f" (
+
+            echo | set /p="Allowing Firewall\Custom Rules - Mail Client... "
+            netsh advfirewall firewall add rule name="Custom Rules - Mail Client" dir=Out protocol=tcp program="%%~f" remoteip=Any localport=Any remoteport=Any action=allow > nul
+            if errorlevel 0 (echo ok) else (echo error)
+        )
     )
 
-    if exist "%CLIENT_SSH%" (
+    for /d %%f in (^
 
-        echo | set /p="Allowing Firewall\Custom Rules - SSH Client... "
-        netsh advfirewall firewall add rule name="Custom Rules - SSH Client" dir=Out protocol=tcp program="%CLIENT_SSH%" remoteip=Any localport=Any remoteport=22 action=allow > nul
-        if errorlevel 0 (echo ok) else (echo error)
+        "%CLIENT_SSH%",^
+        "%ProgramFiles%\PuTTY\putty.exe",^
+        "%ProgramFiles(x86)%\PuTTY\putty.exe",^
+
+        ) do if exist "%%~f" (
+
+            echo | set /p="Allowing Firewall\Custom Rules - SSH Client... "
+            netsh advfirewall firewall add rule name="Custom Rules - SSH Client" dir=Out protocol=tcp program="%%~f" remoteip=Any localport=Any remoteport=22 action=allow > nul
+            if errorlevel 0 (echo ok) else (echo error)
+        )
     )
 
-    if exist "%CLIENT_SCP%" (
+    for /d %%f in (^
 
-        echo | set /p="Allowing Firewall\Custom Rules - SCP Client... "
-        netsh advfirewall firewall add rule name="Custom Rules - SCP Client" dir=Out protocol=tcp program="%CLIENT_SCP%" remoteip=Any localport=Any remoteport=22 action=allow > nul
-        if errorlevel 0 (echo ok) else (echo error)
+        "%CLIENT_SCP%",^
+        "%ProgramFiles%\WinSCP\WinSCP.exe",^
+        "%ProgramFiles(x86)%\WinSCP\WinSCP.exe",^
+
+        ) do if exist "%%~f" (
+
+            echo | set /p="Allowing Firewall\Custom Rules - SCP Client... "
+            netsh advfirewall firewall add rule name="Custom Rules - SCP Client" dir=Out protocol=tcp program="%%~f" remoteip=Any localport=Any remoteport=22 action=allow > nul
+            if errorlevel 0 (echo ok) else (echo error)
+        )
     )
 
-    if exist "%CLIENT_VCS%" (
+    for /d %%f in (^
 
-        echo | set /p="Allowing Firewall\Custom Rules - VCS Client... "
-        netsh advfirewall firewall add rule name="Custom Rules - VCS Client" dir=Out protocol=tcp program="%CLIENT_VCS%" remoteip=Any localport=Any remoteport=Any action=allow > nul
-        if errorlevel 0 (echo ok) else (echo error)
+        "%CLIENT_VCS%",^
+        "%ProgramFiles%\Git\mingw64\libexec\git-core\git-remote-https.exe",^
+        "%ProgramFiles(x86)%\Git\mingw64\libexec\git-core\git-remote-https.exe",^
+
+        ) do if exist "%%~f" (
+
+            echo | set /p="Allowing Firewall\Custom Rules - VCS Client... "
+            netsh advfirewall firewall add rule name="Custom Rules - VCS Client" dir=Out protocol=tcp program="%%~f" remoteip=Any localport=Any remoteport=Any action=allow > nul
+            if errorlevel 0 (echo ok) else (echo error)
+        )
     )
 
     goto :eof
