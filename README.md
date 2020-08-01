@@ -52,7 +52,6 @@ Use `compress [source] [target]` to compress the desired media files, where `sou
 The following environment variables have to be set prior to execution of the script:
 
 - `MAGICK_HOME` - should hold the path to the bin directory of [ImageMagick](https://imagemagick.org/script/download.php)
-- `FFMPEG_HOME` - should hold the path to the bin directory of [FFmpeg](https://ffmpeg.zeranoe.com/builds/)
 
 
 ### execute.cmd
