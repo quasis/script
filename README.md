@@ -63,6 +63,7 @@ Use `execute [source]` to execute the desired source files, where `source` is th
 The following environment variables have to be set prior to execution of the script:
 
 - `LLVM_HOME` - should hold the path to the bin directory of [LLVM](https://releases.llvm.org/download.html)
+- `PHP_HOME` - should hold the path to the directory of [PHP](https://windows.php.net/download/)
 - `DENO_HOME` - should hold the path to the directory of [Deno](https://github.com/denoland/deno/releases) executable
 - `PYTHON_HOME` - should hold the path to the directory of [Python](https://www.python.org/downloads/windows) executable
 

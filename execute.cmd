@@ -10,7 +10,7 @@
 :: DESCRIPTION
 ::
 ::     This script chooses the proper toolchain to (optionally) compile and then
-::     execute a C/C++, JavaScript, TypeScript and Python source code.
+::     execute a C/C++, PHP, JavaScript, TypeScript and Python source code.
 ::
 :: OPTIONS
 ::
@@ -23,6 +23,9 @@
 ::
 ::     LLVM_HOME
 ::         Variable that defines the path to the bin directory of LLVM.
+::
+::     PHP_HOME
+::         Variable that defines the path to the directory of PHP executable.
 ::
 ::     DENO_HOME
 ::         Variable that defines the path to the directory of Deno executable.
@@ -41,8 +44,8 @@
 @echo off
 @setLocal enabledelayedexpansion
 
-if not exist "%PHP_HOME%" (set PHP_HOME=%ProgramFiles%\PHP)
 if not exist "%LLVM_HOME%" (set LLVM_HOME=%ProgramFiles%\LLVM\bin)
+if not exist "%PHP_HOME%" (set PHP_HOME=%ProgramFiles%\PHP)
 if not exist "%DENO_HOME%" (set DENO_HOME=%ProgramFiles%\Deno)
 if not exist "%PYTHON_HOME%" (set PYTHON_HOME=%ProgramFiles%\Python)
 
