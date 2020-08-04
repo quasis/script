@@ -41,6 +41,7 @@
 @echo off
 @setLocal enabledelayedexpansion
 
+if not exist "%PHP_HOME%" (set PHP_HOME=%ProgramFiles%\PHP)
 if not exist "%LLVM_HOME%" (set LLVM_HOME=%ProgramFiles%\LLVM\bin)
 if not exist "%DENO_HOME%" (set DENO_HOME=%ProgramFiles%\Deno)
 if not exist "%PYTHON_HOME%" (set PYTHON_HOME=%ProgramFiles%\Python)
@@ -53,6 +54,7 @@ for %%f in (%SOURCE%) do if exist "%%f" (
     if "%%~xf" == ".cc"   (call :cpp "%%f" "%TEMP%\%%~nf.exe")
     if "%%~xf" == ".cpp"  (call :cpp "%%f" "%TEMP%\%%~nf.exe")
     if "%%~xf" == ".cxx"  (call :cpp "%%f" "%TEMP%\%%~nf.exe")
+    if "%%~xf" == ".php"  (call :php "%%f")
     if "%%~xf" == ".js"   (call :js  "%%f")
     if "%%~xf" == ".ts"   (call :ts  "%%f")
     if "%%~xf" == ".py"   (call :py  "%%f")
@@ -80,6 +82,14 @@ for %%f in (%SOURCE%) do if exist "%%f" (
     )
 
     if exist "%~2" "%~2"
+    goto :eof
+
+:php
+
+    if exist "%PHP_HOME%\php.exe" (
+        "%PHP_HOME%\php.exe" "%~1"
+    )
+
     goto :eof
 
 :js
