@@ -41,27 +41,39 @@
 @echo off
 @setLocal enabledelayedexpansion
 
+if not exist "%LLVM_HOME%" (set LLVM_HOME=%ProgramFiles%\LLVM\bin)
+if not exist "%DENO_HOME%" (set DENO_HOME=%ProgramFiles%\Deno)
+if not exist "%PYTHON_HOME%" (set PYTHON_HOME=%ProgramFiles%\Python)
+
 if "%1" neq "" (set SOURCE=%1) else (set SOURCE=%CD%\*.*)
 
 for %%f in (%SOURCE%) do if exist "%%f" (
 
-    if "%%~xf" == ".cc"   (call :cc "%%f" "%TEMP%\%%~nf.exe")
-    if "%%~xf" == ".cpp"  (call :cc "%%f" "%TEMP%\%%~nf.exe")
-    if "%%~xf" == ".cxx"  (call :cc "%%f" "%TEMP%\%%~nf.exe")
-    if "%%~xf" == ".js"   (call :js "%%f")
-    if "%%~xf" == ".ts"   (call :ts "%%f")
-    if "%%~xf" == ".py"   (call :py "%%f")
+    if "%%~xf" == ".c"    (call :c   "%%f" "%TEMP%\%%~nf.exe")
+    if "%%~xf" == ".cc"   (call :cpp "%%f" "%TEMP%\%%~nf.exe")
+    if "%%~xf" == ".cpp"  (call :cpp "%%f" "%TEMP%\%%~nf.exe")
+    if "%%~xf" == ".cxx"  (call :cpp "%%f" "%TEMP%\%%~nf.exe")
+    if "%%~xf" == ".js"   (call :js  "%%f")
+    if "%%~xf" == ".ts"   (call :ts  "%%f")
+    if "%%~xf" == ".py"   (call :py  "%%f")
 )
 
 @goto :eof
 
-:cc
+:c
 
     if exist "%~2" del "%~2"
 
-    if not exist "%LLVM_HOME%" (
-        set LLVM_HOME=%ProgramFiles%\LLVM\bin
+    if exist "%LLVM_HOME%\clang.exe" (
+        "%LLVM_HOME%\clang.exe" -O3 -m64 -static -Wall -Wextra -Wpedantic --target=x86_64-pc-windows-msvc "%~1" -o "%~2"
     )
+
+    if exist "%~2" "%~2"
+    goto :eof
+
+:cpp
+
+    if exist "%~2" del "%~2"
 
     if exist "%LLVM_HOME%\clang++.exe" (
         "%LLVM_HOME%\clang++.exe" -O3 -std=c++2a -m64 -static -Wall -Wextra -Wpedantic --target=x86_64-pc-windows-msvc "%~1" -o "%~2"
@@ -72,10 +84,6 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 
 :js
 
-    if not exist "%DENO_HOME%" (
-        set DENO_HOME=%ProgramFiles%\Deno
-    )
-
     if exist "%DENO_HOME%\deno.exe" (
         "%DENO_HOME%\deno.exe" run --allow-all "%~1"
     )
@@ -84,10 +92,6 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 
 :ts
 
-    if not exist "%DENO_HOME%" (
-        set DENO_HOME=%ProgramFiles%\Deno
-    )
-
     if exist "%DENO_HOME%\deno.exe" (
         "%DENO_HOME%\deno.exe" run --allow-all "%~1"
     )
@@ -95,10 +99,6 @@ for %%f in (%SOURCE%) do if exist "%%f" (
     goto :eof
 
 :py
-
-    if not exist "%PYTHON_HOME%" (
-        set PYTHON_HOME=%ProgramFiles%\Python
-    )
 
     if exist "%PYTHON_HOME%\python.exe" (
 
