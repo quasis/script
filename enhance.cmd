@@ -1002,6 +1002,8 @@ net session > nul 2>&1 & if not errorlevel 0 (
 
         "%CLIENT_HTTP%",^
         "%ProgramFiles%\Opera\launcher.exe",^
+        "%ProgramFiles%\Firefox\firefox.exe",^
+        "%ProgramFiles%\Mozilla Firefox\firefox.exe",^
 
         ) do if exist "%%~f" (
 
