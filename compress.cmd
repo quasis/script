@@ -58,11 +58,11 @@ if not exist "%MAGICK_HOME%" (
     )
 )
 
-if "%1" neq "" (set SOURCE=%1) else (set SOURCE=%CD%\*.*)
-if "%2" neq "" (set TARGET=%2) else (set TARGET=%TEMP%)
+if "%~1" neq "" (set SOURCE=%~1) else (set SOURCE=*)
+if "%~2" neq "" (set TARGET=%~2) else (set TARGET=%TEMP%)
 if not exist "%TARGET%" mkdir "%TARGET%"
 
-for %%f in (%SOURCE%) do if exist "%%f" (
+for %%f in ("%SOURCE%") do if exist "%%f" (
 
     if "%%~xf" == ".png"  (call :png "%%f" "%TARGET%\%%~nf")
     if "%%~xf" == ".jpg"  (call :jpg "%%f" "%TARGET%\%%~nf")
@@ -75,6 +75,11 @@ for %%f in (%SOURCE%) do if exist "%%f" (
     if "%%~xf" == ".vhd"  (call :vhd "%%f")
     if "%%~xf" == ".vhdx" (call :vhd "%%f")
 )
+
+for /D %%d in ("%SOURCE%") do if exist "%%d" (
+    call "%0" "%%d\*" "%TARGET%\%%~nd"
+)
+
 
 @goto :eof
 
