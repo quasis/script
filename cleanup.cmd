@@ -78,6 +78,7 @@ net session > nul 2>&1 & if not errorlevel 0 (
         "%AllUsersProfile%\Microsoft\Windows Defender\Scans\History\Results\*",^
         "%AllUsersProfile%\Microsoft\WLSetup\Logs",^
         "%AllUsersProfile%\Package Cache",^
+        "%AllUsersProfile%\Intel\ShaderCache",^
 
     ) do if exist "%%~f" (
 
@@ -112,6 +113,7 @@ net session > nul 2>&1 & if not errorlevel 0 (
             "%%u\AppData\Local\pip",^
             "%%u\AppData\Local\Temp",^
             "%%u\AppData\Local\TortoiseGit",^
+            "%%u\AppData\LocalLow\Intel\ShaderCache",^
             "%%u\AppData\LocalLow\Microsoft\CryptnetUrlCache\Content",^
             "%%u\AppData\LocalLow\Microsoft\CryptnetUrlCache\MetaData",^
             "%%u\AppData\LocalLow\Microsoft\Internet Explorer\DOMStore",^
