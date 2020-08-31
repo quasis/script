@@ -1056,6 +1056,7 @@ net session > nul 2>&1 & if not errorlevel 0 (
     for /d %%f in (^
 
         "%CLIENT_VCS%",^
+        "%ProgramFiles(x86)%\Microsoft Visual SourceSafe\ssexp.exe"^,
         "%ProgramFiles%\Git\mingw64\libexec\git-core\git-remote-https.exe",^
         "%ProgramFiles(x86)%\Git\mingw64\libexec\git-core\git-remote-https.exe",^
 
