@@ -213,6 +213,7 @@ net session > nul 2>&1 & if not errorlevel 0 (
         "HKCU\SOFTWARE\Microsoft\Windows\Shell\Bags",^
         "HKCU\SOFTWARE\Microsoft\Windows\ShellNoRoam\BagMRU",^
         "HKCU\SOFTWARE\Microsoft\Windows\ShellNoRoam\Bags",^
+        "HKCU\Software\Microsoft\Office\16.0\Word\Reading Locations",^
 
     ) do reg query "%%~i" > nul 2>&1 && if errorlevel 0 (
 
