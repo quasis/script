@@ -1023,6 +1023,7 @@ net session > nul 2>&1 & if not errorlevel 0 (
 
         "%CLIENT_MAIL%",^
         "%ProgramFiles(x86)%\Microsoft Office\Office12\OUTLOOK.EXE",^
+        "%ProgramFiles(x86)%\Microsoft Office\Office16\OUTLOOK.EXE",^
 
         ) do if exist "%%~f" (
 
