@@ -259,10 +259,6 @@ net session > nul 2>&1 & if not errorlevel 0 (
     reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessCalendar" /t REG_DWORD /d 2 /f > nul
     if errorlevel 0 (echo ok) else (echo error)
 
-    echo | set /p="Setting Policies\Microsoft\Windows\AppPrivacy\LetAppsAccessCamera=2... "
-    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessCamera" /t REG_DWORD /d 2 /f > nul
-    if errorlevel 0 (echo ok) else (echo error)
-
     echo | set /p="Setting Policies\Microsoft\Windows\AppPrivacy\LetAppsAccessContacts=2... "
     reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessContacts" /t REG_DWORD /d 2 /f > nul
     if errorlevel 0 (echo ok) else (echo error)
@@ -277,10 +273,6 @@ net session > nul 2>&1 & if not errorlevel 0 (
 
     echo | set /p="Setting Policies\Microsoft\Windows\AppPrivacy\LetAppsAccessMessaging=2... "
     reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessMessaging" /t REG_DWORD /d 2 /f > nul
-    if errorlevel 0 (echo ok) else (echo error)
-
-    echo | set /p="Setting Policies\Microsoft\Windows\AppPrivacy\LetAppsAccessMicrophone=2... "
-    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessMicrophone" /t REG_DWORD /d 2 /f > nul
     if errorlevel 0 (echo ok) else (echo error)
 
     echo | set /p="Setting Policies\Microsoft\Windows\AppPrivacy\LetAppsAccessRadios=2... "
