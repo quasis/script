@@ -84,6 +84,11 @@ net session > nul 2>&1 & if not errorlevel 0 (
 
 :policies
 
+    :: Control\CrashControl
+
+    echo | set /p="Setting CurrentControlSet\Control\CrashControl\EnableLogFile=0... "
+    reg add "HKLM\SYSTEM\CurrentControlSet\Control\CrashControl" /v "EnableLogFile" /t REG_DWORD /d 0 /f > nul
+    if errorlevel 0 (echo ok) else (echo error)
 
     :: Control\Remote Assistance
 
@@ -94,7 +99,6 @@ net session > nul 2>&1 & if not errorlevel 0 (
     echo | set /p="Setting CurrentControlSet\Control\Remote Assistance\fAllowFullControl=0... "
     reg add "HKLM\SYSTEM\CurrentControlSet\Control\Remote Assistance" /v "fAllowFullControl" /t REG_DWORD /d 0 /f > nul
     if errorlevel 0 (echo ok) else (echo error)
-
 
     :: Policies\Microsoft\Assistance
 
