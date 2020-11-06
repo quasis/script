@@ -299,6 +299,10 @@ net session > nul 2>&1 & if not errorlevel 0 (
     reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessPhone" /t REG_DWORD /d 2 /f > nul
     if errorlevel 0 (echo ok) else (echo error)
 
+    echo | set /p="Setting Policies\Microsoft\Windows\AppPrivacy\LetAppsActivateWithVoice=2... "
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsActivateWithVoice" /t REG_DWORD /d 2 /f > nul
+    if errorlevel 0 (echo ok) else (echo error)
+
     echo | set /p="Setting Policies\Microsoft\Windows\AppPrivacy\LetAppsAccessTrustedDevices=2... "
     reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessTrustedDevices" /t REG_DWORD /d 2 /f > nul
     if errorlevel 0 (echo ok) else (echo error)
