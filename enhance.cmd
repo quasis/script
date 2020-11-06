@@ -793,29 +793,6 @@ net session > nul 2>&1 & if not errorlevel 0 (
 
 :programs
 
-
-    :: Programs\OneDrive
-
-    for %%i in (System32, SysWOW64) do (
-
-        if exist "%SystemRoot%\%%i\OneDriveSetup.exe" (
-
-            echo | set /p="Removing Programs\OneDrive... "
-            taskkill /f /im OneDrive.exe > nul
-            start /wait "%SystemRoot%\%%i\OneDriveSetup.exe" /uninstall
-
-            rd /q /s "%UserProfile%\OneDrive" > nul
-            rd /q /s "%SystemDrive%\OneDriveTemp" > nul
-            rd /q /s "%LocalAppData%\Microsoft\OneDrive" > nul
-            rd /q /s "%ProgramData%\Microsoft OneDrive" > nul
-
-            reg delete "HKCR\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f > nul 2>&1
-            reg delete "HKCR\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f > nul 2>&1
-            if errorlevel 0 (echo ok) else (echo error)
-        )
-    )
-
-
     :: Programs\SearchUI
 
     if exist "%windir%\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy" (
