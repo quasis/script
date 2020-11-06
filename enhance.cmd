@@ -311,6 +311,10 @@ net session > nul 2>&1 & if not errorlevel 0 (
     reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessTrustedDevices" /t REG_DWORD /d 2 /f > nul
     if errorlevel 0 (echo ok) else (echo error)
 
+    echo | set /p="Setting Policies\Microsoft\Windows\AppPrivacy\LetAppsRunInBackground=2... "
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground" /t REG_DWORD /d 2 /f > nul
+    if errorlevel 0 (echo ok) else (echo error)
+
     echo | set /p="Setting Policies\Microsoft\Windows\AppPrivacy\LetAppsSyncWithDevices... "
     reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsSyncWithDevices" /t REG_DWORD /d 2 /f > nul
     if errorlevel 0 (echo ok) else (echo error)
@@ -668,13 +672,6 @@ net session > nul 2>&1 & if not errorlevel 0 (
 
     echo | set /p="Setting Microsoft\Office\16.0\osm\enableupload=0... "
     reg add "HKCU\SOFTWARE\Policies\Microsoft\Office\16.0\osm" /v "enableupload" /t REG_DWORD /d 0 /f > nul
-    if errorlevel 0 (echo ok) else (echo error)
-
-
-    :: Settings\Microsoft\Windows\BackgroundAccessApplications
-
-    echo | set /p="Setting Microsoft\Windows\CurrentVersion\BackgroundAccessApplications\GlobalUserDisabled=1... "
-    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v "GlobalUserDisabled" /t REG_DWORD /d 1 /f > nul
     if errorlevel 0 (echo ok) else (echo error)
 
 
