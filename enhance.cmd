@@ -793,17 +793,6 @@ net session > nul 2>&1 & if not errorlevel 0 (
 
 :programs
 
-    :: Programs\SearchUI
-
-    if exist "%windir%\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy" (
-
-        echo | set /p="Removing Programs\SearchUI... "
-        taskkill /f /im SearchUI.exe > nul
-        move "%windir%\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy" "%windir%\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy.disabled" > nul
-        if errorlevel 0 (echo ok) else (echo error)
-    )
-
-
     goto :eof
 
 
