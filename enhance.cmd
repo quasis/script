@@ -311,6 +311,10 @@ net session > nul 2>&1 & if not errorlevel 0 (
     reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessTrustedDevices" /t REG_DWORD /d 2 /f > nul
     if errorlevel 0 (echo ok) else (echo error)
 
+    echo | set /p="Setting Policies\Microsoft\Windows\AppPrivacy\LetAppsGetDiagnosticInfo=2... "
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsGetDiagnosticInfo" /t REG_DWORD /d 2 /f > nul
+    if errorlevel 0 (echo ok) else (echo error)
+
     echo | set /p="Setting Policies\Microsoft\Windows\AppPrivacy\LetAppsRunInBackground=2... "
     reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground" /t REG_DWORD /d 2 /f > nul
     if errorlevel 0 (echo ok) else (echo error)
