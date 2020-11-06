@@ -793,6 +793,49 @@ net session > nul 2>&1 & if not errorlevel 0 (
 
 :programs
 
+    for %%i in (^
+        "Microsoft.549981C3F5F10"^
+        "Microsoft.BingWeather"^
+        "Microsoft.GetHelp"^
+        "Microsoft.Getstarted"^
+        "Microsoft.MSPaint"^
+        "Microsoft.Microsoft3DViewer"^
+        "Microsoft.MicrosoftOfficeHub"^
+        "Microsoft.MicrosoftSolitaireCollection"^
+        "Microsoft.MicrosoftStickyNotes"^
+        "Microsoft.MixedReality.Portal"^
+        "Microsoft.Office.OneNote"^
+        "Microsoft.People"^
+        "Microsoft.ScreenSketch"^
+        "Microsoft.SkypeApp"^
+        "Microsoft.StorePurchaseApp"^
+        "Microsoft.Wallet"^
+        "Microsoft.Windows.Photos"^
+        "Microsoft.WindowsAlarms"^
+        "Microsoft.WindowsCamera"^
+        "Microsoft.WindowsFeedbackHub"^
+        "Microsoft.WindowsMaps"^
+        "Microsoft.WindowsSoundRecorder"^
+        "Microsoft.WindowsStore"^
+        "Microsoft.Xbox.TCUI"^
+        "Microsoft.XboxApp"^
+        "Microsoft.XboxGameOverlay"^
+        "Microsoft.XboxGamingOverlay"^
+        "Microsoft.XboxIdentityProvider"^
+        "Microsoft.XboxSpeechToTextOverlay"^
+        "Microsoft.YourPhone"^
+        "Microsoft.ZuneMusic"^
+        "Microsoft.ZuneVideo"^
+        "STMicroelectronicsMEMS.DellFreeFallDataProtection"^
+        "microsoft.windowscommunicationsapps"^
+    ) do (
+
+        echo | set /p="Removing Programs\%%~i... "
+        powershell -command "Get-AppxPackage -Name %%i | Remove-AppxPackage"
+        powershell -command "Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like %%i | Remove-AppxProvisionedPackage -Online" > nul
+        if errorlevel 0 (echo ok) else (echo error)
+    )
+
     goto :eof
 
 
