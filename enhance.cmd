@@ -663,6 +663,13 @@ net session > nul 2>&1 & if not errorlevel 0 (
     if errorlevel 0 (echo ok) else (echo error)
 
 
+    :: Settings\Microsoft\Windows\BackgroundAccessApplications
+
+    echo | set /p="Setting Microsoft\Windows\CurrentVersion\BackgroundAccessApplications\GlobalUserDisabled=1... "
+    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v "GlobalUserDisabled" /t REG_DWORD /d 1 /f > nul
+    if errorlevel 0 (echo ok) else (echo error)
+
+
     :: Settings\Microsoft\Windows\Explorer
 
     echo | set /p="Setting Microsoft\Windows\CurrentVersion\Explorer\Advanced\Hidden=1... "
