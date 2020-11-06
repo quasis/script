@@ -535,6 +535,13 @@ net session > nul 2>&1 & if not errorlevel 0 (
     if errorlevel 0 (echo ok) else (echo error)
 
 
+    :: Policies\Microsoft\Windows\TextInput
+
+    echo | set /p="Setting Microsoft\Windows\CurrentVersion\TextInput\AllowLinguisticDataCollection=0... "
+    reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\TextInput" /v "AllowLinguisticDataCollection" /t REG_DWORD /d 0 /f > nul
+    if errorlevel 0 (echo ok) else (echo error)
+
+
     :: Policies\Microsoft\Windows\Windows Error Reporting
 
     echo | set /p="Setting Policies\Microsoft\Windows\Windows Error Reporting\Disabled=1... "
