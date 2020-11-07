@@ -726,17 +726,9 @@ net session > nul 2>&1 & if not errorlevel 0 (
     for %%i in (^
         CDPSvc,^
         CDPUserSvc,^
-        cphs,^
-        cplspcon,^
         DcpSvc,^
-        diagnosticshub.standardcollector.service,^
         DiagTrack,^
-        dmwappushservice,^
-        dmwappushsvc,^
         DoSvc,^
-        esifsvc,^
-        igfxCUIService2.0.0.0,^
-        lfsvc,^
         LicenseManager,^
         MapsBroker,^
         MessagingService,^
@@ -750,22 +742,32 @@ net session > nul 2>&1 & if not errorlevel 0 (
         SensorDataService,^
         SensorService,^
         SensrSvc,^
-        shpamsvc,^
         TrkWks,^
         UnistoreSvc,^
         UserDataSvc,^
-        WalletService,^
-        WbioSrvc,^
-        wercplsupport,^
-        WerSvc,^
-        wisvc,^
-        wlidsvc,^
         WMPNetworkSvc,^
         WSearch,^
+        WalletService,^
+        WbioSrvc,^
+        WerSvc,^
         XblAuthManager,^
         XblGameSave,^
-        xboxgip,^
         XboxNetApiSvc,^
+        cphs,^
+        cplspcon,^
+        diagnosticshub.standardcollector.service,^
+        dmwappushservice,^
+        dmwappushsvc,^
+        edgeupdate,^
+        edgeupdateem,^
+        esifsvc,^
+        igfxCUIService2.0.0.0,^
+        lfsvc,^
+        shpamsvc,^
+        wercplsupport,^
+        wisvc,^
+        wlidsvc,^
+        xboxgip,^
     ) do (
 
         sc query %%i > nul && if errorlevel 0 (
