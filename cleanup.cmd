@@ -157,19 +157,28 @@ net session > nul 2>&1 & if not errorlevel 0 (
     :: Harddisk\Cleanmgr
 
     for %%i in (^
-
         "Active Setup Temp Folders",^
         "BranchCache",^
+        "Content Indexer Cleaner",^
+        "D3D Shader Cache",^
+        "Delivery Optimization Files",^
+        "Device Driver Packages",^
+        "Diagnostic Data Viewer database files",^
+        "DirectX Shader Cache",^
         "Downloaded Program Files",^
+        "DownloadsFolder",^
         "GameNewsFiles",^
         "GameStatisticsFiles",^
         "GameUpdateFiles",^
         "Internet Cache Files",^
+        "Language Pack",^
+        "Language Resource Files",^
         "Memory Dump Files",^
         "Offline Pages Files",^
         "Old ChkDsk Files",^
         "Previous Installations",^
         "Recycle Bin",^
+        "RetailDemo Offline Content",^
         "Service Pack Cleanup",^
         "Setup Log Files",^
         "System error memory dump files",^
@@ -182,13 +191,14 @@ net session > nul 2>&1 & if not errorlevel 0 (
         "Upgrade Discarded Files",^
         "User file versions",^
         "Windows Defender",^
+        "Windows ESD installation files",^
         "Windows Error Reporting Archive Files",^
+        "Windows Error Reporting Files",^
         "Windows Error Reporting Queue Files",^
         "Windows Error Reporting System Archive Files",^
         "Windows Error Reporting System Queue Files",^
-        "Windows ESD installation files",^
         "Windows Upgrade Log Files",^
-
+        "Windows error reports and feedback diagnostics",^
     ) do (
 
         reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\%%~i" /t REG_DWORD /v StateFlags0100 /d 2 /f > nul
