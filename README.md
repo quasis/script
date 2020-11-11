@@ -56,7 +56,7 @@ The following environment variables have to be set prior to execution of the scr
 
 ### execute.cmd
 
-The script chooses the proper toolchain to (optionally) compile and then execute a C/C++, JavaScript and Python source code.
+The script chooses the proper toolchain to (optionally) compile and then execute a C/C++, JavaScript, Python or Bash source code.
 
 Use `execute [source]` to execute the desired source files, where `source` is the wild card mask of the desired files (defaults to `*.*`).
 
