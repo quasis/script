@@ -130,7 +130,7 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 
     if exist "%WSL_HOME%\wsl.exe" (
 
-        "%WSL_HOME%\wsl.exe" "%~2"
+        "%WSL_HOME%\wsl.exe" -u root "%~2"
     )
 
     goto :eof
