@@ -54,15 +54,17 @@ if "%1" neq "" (set SOURCE=%1) else (set SOURCE=%CD%\*.*)
 
 for %%f in (%SOURCE%) do if exist "%%f" (
 
-    if "%%~xf" == ".c"    (call :c   "%%f" "%TEMP%\%%~nf.exe")
-    if "%%~xf" == ".cc"   (call :cpp "%%f" "%TEMP%\%%~nf.exe")
-    if "%%~xf" == ".cpp"  (call :cpp "%%f" "%TEMP%\%%~nf.exe")
-    if "%%~xf" == ".cxx"  (call :cpp "%%f" "%TEMP%\%%~nf.exe")
-    if "%%~xf" == ".php"  (call :php "%%f")
-    if "%%~xf" == ".js"   (call :js  "%%f")
-    if "%%~xf" == ".ts"   (call :ts  "%%f")
-    if "%%~xf" == ".py"   (call :py  "%%f")
-    if "%%~xf" == ".sh"   (call :sh  "%%f" "./%%~nxf")
+    if "%%~xf" == ".c"                   (call :c   "%%f" "%TEMP%\%%~nf.exe")
+    if "%%~xf" == ".cc"                  (call :cpp "%%f" "%TEMP%\%%~nf.exe")
+    if "%%~xf" == ".cpp"                 (call :cpp "%%f" "%TEMP%\%%~nf.exe")
+    if "%%~xf" == ".cxx"                 (call :cpp "%%f" "%TEMP%\%%~nf.exe")
+    if "%%~xf" == ".php"                 (call :php "%%f")
+    if "%%~xf" == ".js"                  (call :js  "%%f")
+    if "%%~xf" == ".ts"                  (call :ts  "%%f")
+    if "%%~xf" == ".py"                  (call :py  "%%f")
+    if "%%~xf" == ".sh"                  (call :sh  "%%f" "./%%~nxf")
+    if "%%~nxf" == "Dockerfile"          (call :dockerfile "%%f" "./%%~nxf")
+    if "%%~nxf" == "docker-compose.yml"  (call :dockercompose "%%f" "./%%~nxf")
 )
 
 @goto :eof
@@ -129,8 +131,26 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 :sh
 
     if exist "%WSL_HOME%\wsl.exe" (
-
         "%WSL_HOME%\wsl.exe" -u root "%~2"
+    )
+
+    goto :eof
+
+:dockerfile
+
+    if exist "%WSL_HOME%\wsl.exe" (
+        "%WSL_HOME%\wsl.exe" -u root service docker start
+        "%WSL_HOME%\wsl.exe" -u root docker rm --force auto
+        "%WSL_HOME%\wsl.exe" -u root docker build --file="%~2" --tag auto:latest .
+        "%WSL_HOME%\wsl.exe" -u root docker run --rm --network host --volume /etc/ssl:/etc/ssl --volume /var/mail:/var/mail --name=auto auto:latest
+    )
+
+    goto :eof
+
+:dockercompose
+
+    if exist "%WSL_HOME%\wsl.exe" (
+        "%WSL_HOME%\wsl.exe" -u root docker-compose --project-name auto --file "%~2" up --build --force-recreate
     )
 
     goto :eof
