@@ -63,6 +63,7 @@ for %%f in (%SOURCE%) do if exist "%%f" (
     if "%%~xf" == ".ts"                  (call :ts  "%%f")
     if "%%~xf" == ".py"                  (call :py  "%%f")
     if "%%~xf" == ".sh"                  (call :sh  "%%f" "./%%~nxf")
+    if "%%~xf" == ".dockerfile"          (call :dockerfile "%%f" "./%%~nxf")
     if "%%~nxf" == "Dockerfile"          (call :dockerfile "%%f" "./%%~nxf")
     if "%%~nxf" == "docker-compose.yml"  (call :dockercompose "%%f" "./%%~nxf")
 )
@@ -139,10 +140,7 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 :dockerfile
 
     if exist "%WSL_HOME%\wsl.exe" (
-        "%WSL_HOME%\wsl.exe" -u root service docker start
-        "%WSL_HOME%\wsl.exe" -u root docker rm --force auto
-        "%WSL_HOME%\wsl.exe" -u root docker build --file="%~2" --tag auto:latest .
-        "%WSL_HOME%\wsl.exe" -u root docker run --rm --network host --volume /etc/ssl:/etc/ssl --volume /var/mail:/var/mail --name=auto auto:latest
+        "%WSL_HOME%\wsl.exe" -u root sh -c "docker rm --force auto && docker build --file='%~2' --tag auto:latest . && docker run --rm --network host --name=auto auto:latest"
     )
 
     goto :eof
@@ -150,7 +148,7 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 :dockercompose
 
     if exist "%WSL_HOME%\wsl.exe" (
-        "%WSL_HOME%\wsl.exe" -u root docker-compose --project-name auto --file "%~2" up --build --force-recreate
+        "%WSL_HOME%\wsl.exe" -u root sh -c "docker-compose --project-name auto --file '%~2' up --build --force-recreate --renew-anon-volumes --remove-orphans"
     )
 
     goto :eof
