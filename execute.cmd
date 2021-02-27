@@ -10,7 +10,8 @@
 :: DESCRIPTION
 ::
 ::     This script chooses the proper toolchain to (optionally) compile and then
-::     execute a C/C++, PHP, JavaScript, TypeScript, Python or Bash source code.
+::     execute a C/C++, PHP, JavaScript, TypeScript, Python, Bash, Docker or the
+::     docker-compose YML source code.
 ::
 :: OPTIONS
 ::

@@ -56,7 +56,7 @@ The following environment variables have to be set prior to execution of the scr
 
 ### execute.cmd
 
-The script chooses the proper toolchain to (optionally) compile and then execute a C/C++, JavaScript, Python or Bash source code.
+The script chooses the proper toolchain to (optionally) compile and then execute a C/C++, PHP, JavaScript, TypeScript, Python, Bash, Docker or docker-compose source code.
 
 Use `execute [source]` to execute the desired source files, where `source` is the wild card mask of the desired files (defaults to `*.*`).
 
@@ -67,6 +67,7 @@ The following environment variables have to be set prior to execution of the scr
 - `DENO_HOME` - should hold the path to the directory of [Deno](https://github.com/denoland/deno/releases) executable
 - `PYTHON_HOME` - should hold the path to the directory of [Python](https://www.python.org/downloads/windows) executable
 
+To execute Bash scripts and docker files WSL 2 (Windows Subsystem for Linux 2) with Docker has to be installed on the local machine.
 
 ## Contributing
 
