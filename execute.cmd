@@ -141,7 +141,7 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 :dockerfile
 
     if exist "%WSL_HOME%\wsl.exe" (
-        "%WSL_HOME%\wsl.exe" -u root sh -c "docker rm --force auto && docker build --file='%~2' --tag auto:latest . && docker run --rm --network host --name=auto auto:latest"
+        "%WSL_HOME%\wsl.exe" -u root sh -c "docker rm --force auto && docker build --network host --file='%~2' --tag auto:latest . && docker run --rm --network host --name=auto auto:latest"
     )
 
     goto :eof
