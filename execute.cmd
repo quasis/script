@@ -67,6 +67,7 @@ for %%f in (%SOURCE%) do if exist "%%f" (
     if "%%~xf" == ".dockerfile"          (call :dockerfile "%%f" "./%%~nxf")
     if "%%~nxf" == "Dockerfile"          (call :dockerfile "%%f" "./%%~nxf")
     if "%%~nxf" == "docker-compose.yml"  (call :dockercompose "%%f" "./%%~nxf")
+    if "%%~nxf" == "stack.yml"           (call :dockercompose "%%f" "./%%~nxf")
 )
 
 @goto :eof
