@@ -141,8 +141,12 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 
 :dockerfile
 
+    if exist ".\.env" (
+        set ENV_FILE=--env-file ./.env
+    )
+
     if exist "%WSL_HOME%\wsl.exe" (
-        "%WSL_HOME%\wsl.exe" -u root sh -c "docker rm --force auto && docker build --network host --file='%~2' --tag auto:latest . && docker run --rm --network host --name=auto auto:latest"
+        "%WSL_HOME%\wsl.exe" -u root sh -c "docker rm --force auto && docker build --network host --file='%~2' --tag auto:latest . && docker run --rm --network host %ENV_FILE% --name=auto auto:latest"
     )
 
     goto :eof
