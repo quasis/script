@@ -49,6 +49,7 @@ if not exist "%LLVM_HOME%" (set LLVM_HOME=%ProgramFiles%\LLVM\bin)
 if not exist "%PHP_HOME%" (set PHP_HOME=%ProgramFiles%\PHP)
 if not exist "%DENO_HOME%" (set DENO_HOME=%ProgramFiles%\Deno)
 if not exist "%PYTHON_HOME%" (set PYTHON_HOME=%ProgramFiles%\Python)
+if not exist "%DOCKER_HOME%" (set DOCKER_HOME=%ProgramFiles%\Docker)
 if not exist "%WSL_HOME%" (set WSL_HOME=%WINDIR%\System32)
 
 if "%1" neq "" (set SOURCE=%1) else (set SOURCE=%CD%\*.*)
@@ -145,7 +146,9 @@ for %%f in (%SOURCE%) do if exist "%%f" (
         set ENV_FILE=--env-file ./.env
     )
 
-    if exist "%WSL_HOME%\wsl.exe" (
+    if exist "%DOCKER_HOME%\docker.exe" (
+        "%DOCKER_HOME%\docker.exe" rm --force auto && "%DOCKER_HOME%\docker.exe" build --network host --file='%~2' --tag auto:latest . && "%DOCKER_HOME%\docker.exe" run --rm --network host %ENV_FILE% --name=auto auto:latest
+    ) else if exist "%WSL_HOME%\wsl.exe" (
         "%WSL_HOME%\wsl.exe" -u root sh -c "docker rm --force auto && docker build --network host --file='%~2' --tag auto:latest . && docker run --rm --network host %ENV_FILE% --name=auto auto:latest"
     )
 
@@ -153,7 +156,9 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 
 :dockercompose
 
-    if exist "%WSL_HOME%\wsl.exe" (
+    if exist "%DOCKER_HOME%\docker.exe" (
+        "%DOCKER_HOME%\docker.exe" compose --project-name auto --file '%~2' up --build --force-recreate --renew-anon-volumes --remove-orphans
+    ) else if exist "%WSL_HOME%\wsl.exe" (
         "%WSL_HOME%\wsl.exe" -u root sh -c "docker compose --project-name auto --file '%~2' up --build --force-recreate --renew-anon-volumes --remove-orphans"
     )
 
