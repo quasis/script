@@ -154,7 +154,7 @@ for %%f in (%SOURCE%) do if exist "%%f" (
 :dockercompose
 
     if exist "%WSL_HOME%\wsl.exe" (
-        "%WSL_HOME%\wsl.exe" -u root sh -c "docker-compose --project-name auto --file '%~2' up --build --force-recreate --renew-anon-volumes --remove-orphans"
+        "%WSL_HOME%\wsl.exe" -u root sh -c "docker compose --project-name auto --file '%~2' up --build --force-recreate --renew-anon-volumes --remove-orphans"
     )
 
     goto :eof
