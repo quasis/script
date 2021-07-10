@@ -147,9 +147,9 @@ for %%f in (%SOURCE%) do if exist "%%f" (
     )
 
     if exist "%DOCKER_HOME%\docker.exe" (
-        "%DOCKER_HOME%\docker.exe" rm --force auto && "%DOCKER_HOME%\docker.exe" build --network host --file='%~2' --tag auto:latest . && "%DOCKER_HOME%\docker.exe" run --rm --network host %ENV_FILE% --name=auto auto:latest
+        "%DOCKER_HOME%\docker.exe" rm --force auto && "%DOCKER_HOME%\docker.exe" buildx build --network host --file='%~2' --tag auto:latest . && "%DOCKER_HOME%\docker.exe" run --rm --network host %ENV_FILE% --name=auto auto:latest
     ) else if exist "%WSL_HOME%\wsl.exe" (
-        "%WSL_HOME%\wsl.exe" -u root sh -c "docker rm --force auto && docker build --network host --file='%~2' --tag auto:latest . && docker run --rm --network host %ENV_FILE% --name=auto auto:latest"
+        "%WSL_HOME%\wsl.exe" -u root sh -c "docker rm --force auto && docker buildx build --network host --file='%~2' --tag auto:latest . && docker run --rm --network host %ENV_FILE% --name=auto auto:latest"
     )
 
     goto :eof
